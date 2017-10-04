@@ -61,10 +61,6 @@ parser.add_argument("--multi",
                     type=int,
                     default=0,
                     help="activate(=1)/deactivate(=0) multi model mode")
-parser.add_argument("--mixed",
-                    type=int,
-                    default=0,
-                    help="activate(=1)/deactivate(=0) mixed model mode")
 parser.add_argument("--model",
                     type=str,
                     default='SVC',
@@ -171,10 +167,8 @@ if FLAGS.grid == 1:
   params_Tree = {}
 
   # grid search
-  if FLAGS.mixed == 1:
-    # train the SVC on the full set, and create a new feature made of its predictions 
-    # train each model separately
-    feeds = mdl.gridsearch(model = classif,
+  if FLAGS.model == 'SVC':
+    dummy = mdl.gridsearch(model = classif,
                            switch = FLAGS.model,
                            params = params_SVC,
                            X_train = data_train,
@@ -182,63 +176,35 @@ if FLAGS.grid == 1:
                            splits = rkf,
                            test_size = test_size,
                            n_repeats = n_repeats)
-                   
-    # train the SVC on the full set, and create a new feature made of its predictions                      
-    classif.set_params(C = feeds['C'], 
-                       gamma = feeds['gamma'])
-    classif.fit(data_train, labels)
-    data_train_custom = mdl.newfeat(classif, data_train)
-    
-    # train the final model
-    dummy = mdl.gridsearch(model = logistic,
+  elif FLAGS.model == 'KNN':
+    dummy = mdl.gridsearch(model = knear,
                            switch = FLAGS.model,
-                           params = params_LR,
-                           X_train = data_train_custom,
+                           params = params_KNN,
+                           X_train = data_train,
                            y_train = labels,
                            splits = rkf,
                            test_size = test_size,
                            n_repeats = n_repeats)
-  
+  elif FLAGS.model == 'LR':
+    dummy = mdl.gridsearch(model = logistic,
+                           switch = FLAGS.model,
+                           params = params_LR,
+                           X_train = data_train,
+                           y_train = labels,
+                           splits = rkf,
+                           test_size = test_size,
+                           n_repeats = n_repeats)
+  elif FLAGS.model == 'Tree':
+    dummy = mdl.gridsearch(model = dtree,
+                           switch = FLAGS.model,
+                           params = params_Tree,
+                           X_train = data_train,
+                           y_train = labels,
+                           splits = rkf,
+                           test_size = test_size,
+                           n_repeats = n_repeats)
   else:
-    # train each model separately
-    if FLAGS.model == 'SVC':
-      dummy = mdl.gridsearch(model = classif,
-                             switch = FLAGS.model,
-                             params = params_SVC,
-                             X_train = data_train,
-                             y_train = labels,
-                             splits = rkf,
-                             test_size = test_size,
-                             n_repeats = n_repeats)
-    elif FLAGS.model == 'KNN':
-      dummy = mdl.gridsearch(model = knear,
-                             switch = FLAGS.model,
-                             params = params_KNN,
-                             X_train = data_train,
-                             y_train = labels,
-                             splits = rkf,
-                             test_size = test_size,
-                             n_repeats = n_repeats)
-    elif FLAGS.model == 'LR':
-      dummy = mdl.gridsearch(model = logistic,
-                             switch = FLAGS.model,
-                             params = params_LR,
-                             X_train = data_train,
-                             y_train = labels,
-                             splits = rkf,
-                             test_size = test_size,
-                             n_repeats = n_repeats)
-    elif FLAGS.model == 'Tree':
-      dummy = mdl.gridsearch(model = dtree,
-                             switch = FLAGS.model,
-                             params = params_Tree,
-                             X_train = data_train,
-                             y_train = labels,
-                             splits = rkf,
-                             test_size = test_size,
-                             n_repeats = n_repeats)
-    else:
-      print("No model selected. Please choose one with the --model option.")
+    print("No model selected. Please choose one with the --model option.")
             
 ########################################################
 # Fitting and predictions (no-grid, failed pred outputs)
@@ -356,32 +322,6 @@ elif FLAGS.multi == 1:
   pred = ((knear.predict(data_train) + classif.predict(data_train) + logistic.predict(data_train))/3 + 0.5).astype(int)
   score = 1 - ((abs(labels-pred)).sum() / len(data_train))
   print("Total training score: %0.3f" % score)
-  
-  # Write the prediction file
-  prt.outwriter(filename = FLAGS.pred_output,
-                testindex = index,
-                predictions = predictions)
-              
-##############################################
-# Fitting and predictions outputs (mixed mode)
-##############################################
-elif FLAGS.mixed == 1:
-  # train the SVC                   
-  classif.set_params(C = params_SVC['C'], 
-                     gamma = params_SVC['gamma'])
-  classif.fit(data_train, labels)
-  
-  # create a new feature made of its predictions for training and test sets
-  data_train_custom = mdl.newfeat(classif, data_train)
-  data_test_custom = mdl.newfeat(classif, data_test)
-  
-  # train the final model
-  predictions = mdl.trainpred(model = logistic,
-                              switch = FLAGS.model,
-                              params = params_LR,
-                              X_train = data_train_custom,
-                              y_train = labels,
-                              X_test = data_test_custom)
   
   # Write the prediction file
   prt.outwriter(filename = FLAGS.pred_output,
