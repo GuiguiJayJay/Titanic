@@ -1,0 +1,63 @@
+'params' 
+	 index 0: {'n_neighbors': 2, 'weights': 'uniform'} 
+	 index 1: {'n_neighbors': 2, 'weights': 'distance'} 
+	 index 2: {'n_neighbors': 3, 'weights': 'uniform'} 
+	 index 3: {'n_neighbors': 3, 'weights': 'distance'} 
+	 index 4: {'n_neighbors': 4, 'weights': 'uniform'} 
+	 index 5: {'n_neighbors': 4, 'weights': 'distance'} 
+	 index 6: {'n_neighbors': 5, 'weights': 'uniform'} 
+	 index 7: {'n_neighbors': 5, 'weights': 'distance'} 
+	 index 8: {'n_neighbors': 6, 'weights': 'uniform'} 
+	 index 9: {'n_neighbors': 6, 'weights': 'distance'} 
+	 index 10: {'n_neighbors': 7, 'weights': 'uniform'} 
+	 index 11: {'n_neighbors': 7, 'weights': 'distance'} 
+	 index 12: {'n_neighbors': 8, 'weights': 'uniform'} 
+	 index 13: {'n_neighbors': 8, 'weights': 'distance'} 
+	 index 14: {'n_neighbors': 9, 'weights': 'uniform'} 
+	 index 15: {'n_neighbors': 9, 'weights': 'distance'} 
+	 index 16: {'n_neighbors': 10, 'weights': 'uniform'} 
+	 index 17: {'n_neighbors': 10, 'weights': 'distance'} 
+	 index 18: {'n_neighbors': 11, 'weights': 'uniform'} 
+	 index 19: {'n_neighbors': 11, 'weights': 'distance'} 
+	 index 20: {'n_neighbors': 12, 'weights': 'uniform'} 
+	 index 21: {'n_neighbors': 12, 'weights': 'distance'} 
+	 index 22: {'n_neighbors': 13, 'weights': 'uniform'} 
+	 index 23: {'n_neighbors': 13, 'weights': 'distance'} 
+	 index 24: {'n_neighbors': 14, 'weights': 'uniform'} 
+	 index 25: {'n_neighbors': 14, 'weights': 'distance'} 
+	 index 26: {'n_neighbors': 15, 'weights': 'uniform'} 
+	 index 27: {'n_neighbors': 15, 'weights': 'distance'} 
+	 index 28: {'n_neighbors': 16, 'weights': 'uniform'} 
+	 index 29: {'n_neighbors': 16, 'weights': 'distance'} 
+	 index 30: {'n_neighbors': 17, 'weights': 'uniform'} 
+	 index 31: {'n_neighbors': 17, 'weights': 'distance'} 
+	 index 32: {'n_neighbors': 18, 'weights': 'uniform'} 
+	 index 33: {'n_neighbors': 18, 'weights': 'distance'} 
+	 index 34: {'n_neighbors': 19, 'weights': 'uniform'} 
+	 index 35: {'n_neighbors': 19, 'weights': 'distance'} 
+'mean_test_score' 	 [ 0.771156    0.77239057  0.80056117  0.80179574  0.80325477  0.80740741
+  0.80493827  0.80897868  0.80314254  0.81010101  0.80561167  0.81234568
+  0.80527497  0.81369248  0.8043771   0.81077441  0.80639731  0.81380471
+  0.80426487  0.81301908  0.80359147  0.81335578  0.80213244  0.81077441
+  0.8030303   0.81290685  0.80224467  0.81032548  0.80157127  0.81088664
+  0.80179574  0.80998878  0.80011223  0.80953984  0.79977553  0.81010101] 
+'std_test_score' 	 [ 0.03036272  0.03107453  0.03014396  0.03150115  0.0296073   0.03117135
+  0.02957351  0.03160029  0.02948783  0.03077459  0.03210982  0.03279489
+  0.03356881  0.03296408  0.03189972  0.03272985  0.03095857  0.03125673
+  0.03083712  0.03182945  0.03182821  0.03082544  0.03312624  0.03292754
+  0.03402527  0.03262253  0.0350266   0.03398043  0.03386287  0.03233739
+  0.03425388  0.03394695  0.03301093  0.03117431  0.03530613  0.03259574] 
+'rank_test_score' 	 [36 35 32 29 24 16 20 15 25 11 18  6 19  2 21  8 17  1 22  4 23  3 28  8 26
+  5 27 10 31  7 29 13 33 14 34 11] 
+'mean_train_score' 	 [ 0.78729186  0.78981699  0.81652856  0.8194743   0.81753465  0.8213782
+  0.81823571  0.82308959  0.81927339  0.82429588  0.81677634  0.82440777
+  0.81905063  0.8265138   0.81725548  0.82724343  0.81815337  0.82825357
+  0.81635735  0.82808514  0.81652589  0.82845     0.8147576   0.82875832
+  0.81526271  0.82881485  0.81554286  0.82920736  0.81548664  0.82957261
+  0.8156839   0.82960062  0.81537487  0.82988128  0.81602075  0.8297969 ] 
+'std_train_score' 	 [ 0.01537846  0.01532335  0.01430394  0.01443563  0.00989063  0.00999353
+  0.0096284   0.00934965  0.00971396  0.00977229  0.00951449  0.01011959
+  0.00920225  0.00909423  0.00855736  0.00936234  0.00713851  0.00794675
+  0.00887169  0.00857431  0.00850519  0.00812807  0.00891616  0.00867999
+  0.00799903  0.00809338  0.00805658  0.00842085  0.00819583  0.00822854
+  0.0088064   0.00849344  0.00813164  0.0080178   0.0083098   0.00848307] 
