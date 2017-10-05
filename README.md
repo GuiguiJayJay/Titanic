@@ -5,14 +5,14 @@ Scikit-Learn.
 
 Most of the models currently implemented allowed to me to hit 78.9% accuracy on test data provided
 by Kaggle, so if you have something else using this, well there is a problem somewhere! I mostly 
-used the Support Vector Classifier for this task, despite most of people on Kaggle reporting better 
+used the Support Vector Classifier for this task, despite most of peoples on Kaggle reporting better 
 results using a Decision Tree. Well for me it was not the case. You can test yourself, there is an 
 option to train a Decision Tree.
 
 I will detail the content in subsequent sections, but would like to make a summary of the files here:
-- all the text files are monitoring outputs from the code. You can skip it, there is no code inside.
-- the main part of the code (the executable script) is **titanic.py**. This is where all options are 
-defined and where all models are defined.
+- all the text files are monitoring outputs from the code. You can skip them, there is no code inside.
+- the main part of the code (the executable script) is **titanic.py**. This is where all options and
+models are defined.
 - the directory **titalib** contains custom-made librairies. Those weren't *necessary* but greatly
 helps improving the readability of the script and its versatility. The feature engineering is performed
 into one of the scripts from this directory, we will come back later on it.
@@ -29,16 +29,17 @@ I created this script using:
 - Pandas 0.20.3
 
 ## Usage
-Simply execute the script to train the default SVC with the parameter C=2 and use a Radial Basis Fucntion
+Simply execute the script to train the default SVC with the parameter C=2 and use a Radial Basis Function
 as a kernel of parameter gamma=0.0173. It will produce a prediction file formatted to be submitted on 
 Kaggle under the 'data/' directory. You can go into *titanic.py* script to change those settings.
 
-All the features are  transformed into categorical features, one-hot-encoded (for non-binary ones) and
+All the features are transformed into categorical features, one-hot-encoded (for non-binary ones) and
 are scaled to mean=0 and std=1. Currently, there are 5 categorical features left (*Age*, *Fare*, *Sex*, 
 *Relatives* and *Location*), 3 being binary (*Age*, *Sex* and *Relatives*), one with 3 categories (*Fare*)
 and the last with 4 categories (*Location*). This give a total of 96 combinations, which is about one order
 of magnitude below the data count (which is about 800). We then can reasonably hope that each of our 
-combination will be populated, and that our models will be able to train on each possible case.
+combination will be populated, and that our models will be able to train on each possible case. The former is not
+necessarly true, but I still think it is preferable to train on as many configurations as possible.
 
 Alternatively, you might want to play around with other models, or explore different parameters settings.
 There are numerous flags for this. The full option list is detailed below. They are all defined into 
