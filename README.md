@@ -123,5 +123,6 @@ the *GridSearchCV* object), in case you need more informations.
 
 ### fails_*.txt
 The funnier of output files. This one contains a list of all the data entries the given model fails to 
-reproduce. Can be usefull before deciding or not to use an ensemble method or which weight to use for their
-vote.
+reproduce. Can be usefull before deciding or not to use an ensemble method and which weight to use for their
+vote, or simply to understand why fails the models (if it is because of outliers, if there is a particular
+pattern etc...).
