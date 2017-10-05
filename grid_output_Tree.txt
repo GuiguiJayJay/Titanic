@@ -1,7 +1,0 @@
-'params' 
-	 index 0: {} 
-'mean_test_score' 	 [ 0.80942761] 
-'std_test_score' 	 [ 0.02065957] 
-'rank_test_score' 	 [1] 
-'mean_train_score' 	 [ 0.83294107] 
-'std_train_score' 	 [ 0.00571025] 
