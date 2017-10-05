@@ -61,6 +61,8 @@ The available models are for instance a Support Vector Classifier ('SVC'), a Dec
  a Logistic Regression ('LR') or k-Nearest Neighbors ('KNN'). By default, this option is set to 'SVC'. Also 
  note that this field is append to the output text files.
 
+Note that except for the model option, those modes are all exclusive to each other.
+
 Data settings:
 - **--child**: the limit in years below which a passenger will be treated as a child.
 - **--sibsp**: the maximum number of vanilla categories preserved for *SibSp* feature after label-encoding. 
@@ -80,13 +82,13 @@ This is the main script. You will find inside all the options to run the code (d
 of data slicing. The most important things you need to know here are about the following lines, near the beginning 
 of the code:
 
-  droplist = ['Name','Ticket','Survived','Cabin','Embarked','Pclass','SibSp','Parch']
+- droplist = ['Name','Ticket','Survived','Cabin','Embarked','Pclass','SibSp','Parch']  
 The droplist is the list of pandas columns to be kicked after the data have been pre-processed. You see here
 that the features *SibSp* and *Parch* are on the droplist, that's why their cut option defined above is currently
 useless. If you want them back, remove them from this list and add instead 'Relatives', which is a new feature built
 on those two.
 
-  mask = [False,True,False,False,True]
+- mask = [False,True,False,False,True]  
 The mask indicates whether or not a column has to be one-hot encoded or not. Binary features shouldn't foo obvious
 reasons, as well as numerical features. To know precisely which fields corresponds to which feature, simply print
 the first element of the pandas dataframe output by the *prep.dataformat()* function.
