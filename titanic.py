@@ -3,12 +3,7 @@
 Titanic challenge draft
 ================================
 
-v.021017
-Supports:
-  - multi-model mode:
-      predictions of different models are averaged to give the final predictions.
-  - mixed-model mode:
-      use the predictions of an SVC as a new feature for a Logistic Regression.
+v.051017
 """
 print(__doc__)
 

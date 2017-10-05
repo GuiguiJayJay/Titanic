@@ -29,16 +29,21 @@ I created this script using:
 - Pandas 0.20.3
 
 ## Usage
-Simply execute the script to train the default SVC with the parameters C=2, gamma=0.0173 and 
-kernel='rbf'. It will produce a prediction file formatted to be submitted on Kaggle under the 'data/'
-directory. You can go into *titanic.py* script to change those settings.
+Simply execute the script to train the default SVC with the parameter C=2 and use a Radial Basis Fucntion
+as a kernel of parameter gamma=0.0173. It will produce a prediction file formatted to be submitted on 
+Kaggle under the 'data/' directory. You can go into *titanic.py* script to change those settings.
 
 All the features are  transformed into categorical features, one-hot-encoded (for non-binary ones) and
-are scaled to mean=0 and std=1.
+are scaled to mean=0 and std=1. Currently, there are 5 categorical features left (*Age*, *Fare*, *Sex*, 
+*Relatives* and *Location*), 3 being binary (*Age*, *Sex* and *Relatives*), one with 3 categories (*Fare*)
+and the last with 4 categories (*Location*). This give a total of 96 combinations, which is about one order
+of magnitude below the data count (which is about 800). We then can reasonably hope that each of our 
+combination will be populated, and that our models will be able to train on each possible case.
 
 Alternatively, you might want to play around with other models, or explore different parameters settings.
 There are numerous flags for this. The full option list is detailed below. They are all defined into 
-*titanic.py* script.  
+*titanic.py* script. You can also go for a different feature engineering route. For this, you will have 
+to go into the *dataformat()* function in the *data/preproc.py* file.
 
 Paths:
 - **--train_data** will specify the full path to the training file.
