@@ -111,15 +111,17 @@ data_test_raw = prep.dataload(FLAGS.test_data)
 # save index of test set as a list for reconstruction of ouput file
 index = data_test_raw.index.tolist()
 
-# format and clean up the data
+# fields to be kicked after data procesing
 droplist = ['Name','Ticket','Survived','Cabin','Embarked','Pclass','SibSp','Parch']
+# format and clean up the data
 fullset, trainsize, labels = prep.dataformat(data_train_raw,
                                              data_test_raw,
                                              droplist=droplist,
                                              limits=limits)
 
-# one-hot encoding and split back data 
+# mask of categorical (non-binary) features to be one-hot-encoded
 mask = [False,True,False,False,True]
+# one-hot encoding and split back data 
 data_train, data_test, labels = prep.dataonehot(dataset=fullset,
                                                 mask=mask,
                                                 labels=labels,

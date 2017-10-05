@@ -5,15 +5,17 @@ Scikit-Learn.
 
 Most of the models currently implemented allowed to me to hit 78.9% accuracy on test data provided
 by Kaggle, so if you have something else using this, well there is a problem somewhere! I mostly 
-used the Supprot Vector Classifier for this task, despite most of people on Kaggle reporting better 
-results using a Decision Tree. Well for me it is not the case. You can test yourself, there is an 
+used the Support Vector Classifier for this task, despite most of people on Kaggle reporting better 
+results using a Decision Tree. Well for me it was not the case. You can test yourself, there is an 
 option to train a Decision Tree.
 
 I will detail the content in subsequent sections, but would like to make a summary of the files here:
 - all the text files are monitoring outputs from the code. You can skip it, there is no code inside.
-- the main part of the code (the executable script) is **titanic.py**.
+- the main part of the code (the executable script) is **titanic.py**. This is where all options are 
+defined and where all models are defined.
 - the directory **titalib** contains custom-made librairies. Those weren't *necessary* but greatly
-helps improving the readability of the script and its versatility.
+helps improving the readability of the script and its versatility. The feature engineering is performed
+into one of the scripts from this directory, we will come back later on it.
 - the **data** directory contains data downloaded from the Kaggle challenge page, as well as the 
 prediction file produced by the code.
 
@@ -30,6 +32,9 @@ I created this script using:
 Simply execute the script to train the default SVC with the parameters C=2, gamma=0.0173 and 
 kernel='rbf'. It will produce a prediction file formatted to be submitted on Kaggle under the 'data/'
 directory. You can go into *titanic.py* script to change those settings.
+
+All the features are  transformed into categorical features, one-hot-encoded (for non-binary ones) and
+are scaled to mean=0 and std=1.
 
 Alternatively, you might want to play around with other models, or explore different parameters settings.
 There are numerous flags for this. The full option list is detailed below. They are all defined into 
@@ -49,7 +54,7 @@ a cross-validation set and a training set after shuffling the data. Its purpose 
 rather than models so you can totally skip this section.
 - **--multi**: the multi-mode is a simple ensemble method in this code. It is used to produce a prediciton file
 made from the equal-weight-averaged predictions from a k-Nearest Neighbors, a Support Vector Classifier, and a 
-Logistic Regression.
+Logistic Regression. Scikit-learn provides functions to do that, but I didn't know at that time.
 - **--model**: this option specify the model you want to use for your grid search, your testing or if you run
 in single mode (the default option, that's to say *grid*, *test*, *multi* and *mixed* are all set to 0).
 The available models are for instance a Support Vector Classifier ('SVC'), a Decision Tree ('Tree'),
@@ -70,3 +75,45 @@ to be of any use.
 that will be put into the same category.
 
 ## The files
+### titanic.py
+This is the main script. You will find inside all the options to run the code (described above) and the settings
+of data slicing. The most important things you need to know here are about the following lines, near the beginning 
+of the code:
+
+  droplist = ['Name','Ticket','Survived','Cabin','Embarked','Pclass','SibSp','Parch']
+The droplist is the list of pandas columns to be kicked after the data have been pre-processed. You see here
+that the features *SibSp* and *Parch* are on the droplist, that's why their cut option defined above is currently
+useless. If you want them back, remove them from this list and add instead 'Relatives', which is a new feature built
+on those two.
+
+  mask = [False,True,False,False,True]
+The mask indicates whether or not a column has to be one-hot encoded or not. Binary features shouldn't foo obvious
+reasons, as well as numerical features. To know precisely which fields corresponds to which feature, simply print
+the first element of the pandas dataframe output by the *prep.dataformat()* function.
+
+### titalib/preproc.py
+This files contains functions related to the pre-processing of data, namely the feature engineering, the one-hot
+encoding and the feature scaling. The *dataformat()* function is in charge to perform the feature engineering
+and is probably the most important of all the files if you had to choose one to read.
+
+### titalib/models.py
+This files contains functions to run the different operating modes described above. Those are just shortcuts
+to train a model, print infos to terminal and write an output file in order to make the main script lighter.
+
+### titalib/printer.py
+This files contains the routines to write all the output files, and basic infos about the chosen settings 
+in the terminal.
+
+### grid_output_*.txt
+Those files give more detailed results of the grid search provided by scikit-learn for a given model. It will 
+give you all the parameters combination tested, their rank (the first being the best parameters combination), 
+as well as the mean train/test score and the associated standard deviation for each data split used.
+
+### cv_log_*.txt
+This files simply contains the full output of scikit-learn's grid search ( the *cv_results_* attribute of
+the *GridSearchCV* object), in case you need more informations.
+
+### fails_*.txt
+The funnier of output files. This one contains a list of all the data entries the given model fails to 
+reproduce. Can be usefull before deciding or not to use an ensemble method or which weight to use for their
+vote.
