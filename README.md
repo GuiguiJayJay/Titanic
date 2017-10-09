@@ -112,16 +112,16 @@ to train a model, print infos to terminal and write an output file in order to m
 This files contains the routines to write all the output files, and basic infos about the chosen settings 
 in the terminal.
 
-### grid_output_*.txt
+### textfiles/grid_output_*.txt
 Those files give more detailed results of the grid search provided by scikit-learn for a given model. It will 
 give you all the parameters combination tested, their rank (the first being the best parameters combination), 
 as well as the mean train/test score and the associated standard deviation for each data split used.
 
-### cv_log_*.txt
+### textfiles/cv_log_*.txt
 This files simply contains the full output of scikit-learn's grid search ( the `cv_results_` attribute of
 the `GridSearchCV` object), in case you need more informations.
 
-### fails_*.txt
+### textfiles/fails_*.txt
 The funnier of output files. This one contains a list of all the data entries the given model fails to 
 reproduce. Can be usefull before deciding or not to use an ensemble method and which weight to use for their
 vote, or simply to understand why fails the models (if it is because of outliers, if there is a particular
