@@ -3,7 +3,7 @@
 Titanic challenge draft
 ================================
 
-v.051017
+v.091017
 """
 print(__doc__)
 
@@ -220,73 +220,50 @@ elif FLAGS.test == 1:
   y_train = labels[testsize:]
   X_test = data_train[:testsize]
   y_test = labels[:testsize]
-  
-  # train, predict and write output files for failed predictions:
-  if FLAGS.mixed == 1:                 
-    # train the SVC                   
-    classif.set_params(C = params_SVC['C'], 
-                       gamma = params_SVC['gamma'])
-    classif.fit(X_train, y_train)
-    
-    # create a new feature made of its predictions for training and test sets
-    X_train_custom = mdl.newfeat(classif, X_train)
-    X_test_custom = mdl.newfeat(classif, X_test)
-    
-    # train the final model
-    mdl.traintest(model = logistic,
+                  
+  # train each model separately
+  if FLAGS.model == 'SVC':
+    mdl.traintest(model = classif,
                   switch = FLAGS.model,
-                  params = params_LR,
-                  X_train = X_train_custom,
+                  params = params_SVC,
+                  X_train = X_train,
                   y_train = y_train,
-                  X_test = X_test_custom,
+                  X_test = X_test,
                   y_test = y_test,
                   testsize = testsize,
                   order = order)
-                  
+  elif FLAGS.model == 'KNN':                    
+    mdl.traintest(model = knear,
+                  switch = FLAGS.model,
+                  params = params_KNN,
+                  X_train = X_train,
+                  y_train = y_train,
+                  X_test = X_test,
+                  y_test = y_test,
+                  testsize = testsize,
+                  order = order)
+  elif FLAGS.model == 'LR':                  
+    mdl.traintest(model = logistic,
+                  switch = FLAGS.model,
+                  params = params_LR,
+                  X_train = X_train,
+                  y_train = y_train,
+                  X_test = X_test,
+                  y_test = y_test,
+                  testsize = testsize,
+                  order = order)
+  elif FLAGS.model == 'Tree':                  
+    mdl.traintest(model = dtree,
+                  switch = FLAGS.model,
+                  params = params_Tree,
+                  X_train = X_train,
+                  y_train = y_train,
+                  X_test = X_test,
+                  y_test = y_test,
+                  testsize = testsize,
+                  order = order)
   else:
-    # train each model separately
-    if FLAGS.model == 'SVC':
-      mdl.traintest(model = classif,
-                    switch = FLAGS.model,
-                    params = params_SVC,
-                    X_train = X_train,
-                    y_train = y_train,
-                    X_test = X_test,
-                    y_test = y_test,
-                    testsize = testsize,
-                    order = order)
-    elif FLAGS.model == 'KNN':                    
-      mdl.traintest(model = knear,
-                    switch = FLAGS.model,
-                    params = params_KNN,
-                    X_train = X_train,
-                    y_train = y_train,
-                    X_test = X_test,
-                    y_test = y_test,
-                    testsize = testsize,
-                    order = order)
-    elif FLAGS.model == 'LR':                  
-      mdl.traintest(model = logistic,
-                    switch = FLAGS.model,
-                    params = params_LR,
-                    X_train = X_train,
-                    y_train = y_train,
-                    X_test = X_test,
-                    y_test = y_test,
-                    testsize = testsize,
-                    order = order)
-    elif FLAGS.model == 'Tree':                  
-      mdl.traintest(model = dtree,
-                    switch = FLAGS.model,
-                    params = params_Tree,
-                    X_train = X_train,
-                    y_train = y_train,
-                    X_test = X_test,
-                    y_test = y_test,
-                    testsize = testsize,
-                    order = order)
-    else:
-      print("No model selected. Please choose one with the --model option.")
+    print("No model selected. Please choose one with the --model option.")
       
 ##############################################
 # Fitting and predictions outputs (multi mode)

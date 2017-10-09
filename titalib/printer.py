@@ -85,7 +85,7 @@ def monitor(results, includelist, full_log=False, model=''):
   """
   
   print()
-  filename = 'grid_output_' + model + '.txt'
+  filename = 'textfiles/' + 'grid_output_' + model + '.txt'
   outfile = open(filename, 'w')
                   
   for item in includelist:
@@ -99,7 +99,7 @@ def monitor(results, includelist, full_log=False, model=''):
   print("Output file written: %r" % filename)
 
   if full_log == True:
-    full_log_name = 'cv_log_' + model + '.txt'
+    full_log_name = 'textfiles/' + 'cv_log_' + model + '.txt'
     full = open(full_log_name, 'w+')
     for item in results.keys():
       full.write("%r \t %s \n" % (item,results[item]))
@@ -236,7 +236,7 @@ def fails(datafails, order, model):
   """
   
   print()
-  filename = 'fails_' + model + '.txt'
+  filename = 'textfiles/' + 'fails_' + model + '.txt'
   failedfile = open(filename, 'w+')
   
   for i in range(0,len(datafails)):
