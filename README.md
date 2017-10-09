@@ -14,7 +14,7 @@ I will detail the content in subsequent sections, but would like to make a summa
 - the main part of the code (the executable script) is **titanic.py**. This is where all options and
 models are defined.
 - the directory **titalib** contains custom-made librairies. Those weren't *necessary* but greatly
-helps improving the readability of the script and its versatility. The feature engineering is performed
+help improving the readability of the script and its versatility. The feature engineering is performed
 into one of the scripts from this directory, we will come back later on it.
 - the **data** directory contains data downloaded from the Kaggle challenge page, as well as the 
 prediction file produced by the code.
@@ -124,5 +124,5 @@ the `GridSearchCV` object), in case you need more informations.
 ### textfiles/fails_*.txt
 The funnier of output files. This one contains a list of all the data entries the given model fails to 
 reproduce. Can be usefull before deciding or not to use an ensemble method and which weight to use for their
-vote, or simply to understand why fails the models (if it is because of outliers, if there is a particular
+vote, or simply to understand why the current model fails (if it is because of outliers, if there is a particular
 pattern etc...).
